@@ -1,0 +1,9 @@
+{
+    "require": {
+        "fzaninotto/faker": "^1.8",
+        "symfony/validator": "^4.2",
+        "box/spout": "^2.7",
+        "aura/sqlquery": "^2.7",
+        "pelmered/fake-car": "^1.3"
+    }
+}
