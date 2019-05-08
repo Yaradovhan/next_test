@@ -1,28 +1,38 @@
 <?php
 
+use Qpdb\PdoWrapper\PdoWrapperService;
+use Qpdb\QueryBuilder\QueryBuild;
+
 class ValidationCategory
 {
-    private $con;
-    private $queryFactory;
 
-    public function __construct($connect = null, $queryFactory = null)
+    public function __construct()
     {
-        $this->con = $connect;
-        $this->queryFactory = $queryFactory;
+        $configSample = new ConfigSample();
+        PdoWrapperService::getInstance()->setPdoWrapperConfig($configSample);
     }
 
     public function confirmData(string $data)
     {
         $catIds = [];
         $catIds = explode('/', $data);
-//        dd($catIds);
-        $select = $this->queryFactory->newSelect();
-        $select->cols([
-           'id',
-           'name',
-           'parent_id'
-        ]);
-        dd($select);
+
+        dd($catIds);
+        foreach ($catIds as $k => $id) {
+//            dd($id);
+            $query = QueryBuild::select('Categories')
+               ->fields('name, parent_id')
+               ->whereEqual('id',$id);
+dd($query->getSyntax());
+//            $result = $query->execute();
+            /** return array */
+//            dd($result);
+
+
+        }
+
+
+
     }
 
 }

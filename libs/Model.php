@@ -5,15 +5,12 @@ require_once 'ValidationCategory.php';
 
 use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Common\Type;
-use Aura\SqlQuery\QueryFactory;
 
 class Model
 {
     protected $placeHolderProp = array();
     protected $dataProp = array();
     protected $validCat;
-    protected $connect;
-    protected $queryFactory;
 
     public function __construct()
     {
@@ -23,9 +20,7 @@ class Model
         $this->dataProp['%SUCCESS_FILES%'] = [];
         $this->placeHolderProp['%FAIL%'] = '';
         $this->dataProp['%FAIL_FILES%'] = [];
-        $this->connect = DB::getConnection();
-        $this->queryFactory = new QueryFactory('mysql');
-        $this->validCat = new ValidationCategory($this->connect,$this->queryFactory);
+        $this->validCat = new ValidationCategory();
 
     }
 

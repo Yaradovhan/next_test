@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "71c4ade5ccc912207cf1650fc11f74a7",
+    "content-hash": "a94eb58c9026617e5ea3d9e7ba0638d0",
     "packages": [
         {
             "name": "aura/sqlquery",
@@ -865,6 +865,136 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "qpdb/common",
+            "version": "1.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adumitru68/CommonClasses.git",
+                "reference": "77d2de593462c9d1f541c0977b01ca03dd592ae8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adumitru68/CommonClasses/zipball/77d2de593462c9d1f541c0977b01ca03dd592ae8",
+                "reference": "77d2de593462c9d1f541c0977b01ca03dd592ae8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qpdb\\Common\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Dumitru",
+                    "email": "adrian.dumitru.68@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Php common classes for Qpdb apps",
+            "keywords": [
+                "php"
+            ],
+            "time": "2019-04-24T10:03:59+00:00"
+        },
+        {
+            "name": "qpdb/pdo-wrapper",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adumitru68/PdoWrapper.git",
+                "reference": "902bd6b24b05fae1a5675dc5c59d594e16cea6d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adumitru68/PdoWrapper/zipball/902bd6b24b05fae1a5675dc5c59d594e16cea6d6",
+                "reference": "902bd6b24b05fae1a5675dc5c59d594e16cea6d6",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "php": ">=5.6",
+                "qpdb/common": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qpdb\\PdoWrapper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Dumitru",
+                    "email": "adrian.dumitru.68@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php Pdo wrapper",
+            "keywords": [
+                "mysql",
+                "pdo",
+                "php"
+            ],
+            "time": "2019-05-01T08:22:38+00:00"
+        },
+        {
+            "name": "qpdb/query-builder",
+            "version": "2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/adumitru68/QueryBuilder.git",
+                "reference": "9e3dfb4c38ae7f631993489dbbf5fc7b8b0c20e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/adumitru68/QueryBuilder/zipball/9e3dfb4c38ae7f631993489dbbf5fc7b8b0c20e6",
+                "reference": "9e3dfb4c38ae7f631993489dbbf5fc7b8b0c20e6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "qpdb/common": "^1.0",
+                "qpdb/pdo-wrapper": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Qpdb\\QueryBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Dumitru",
+                    "email": "adrian.dumitru.68@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php class for build MySql queries that prevents mysql injections",
+            "keywords": [
+                "mysql",
+                "pdo",
+                "php",
+                "querybuilder"
+            ],
+            "time": "2019-05-01T09:02:14+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
