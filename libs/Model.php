@@ -5,6 +5,9 @@ require_once 'ValidationCategory.php';
 
 use Box\Spout\Reader\ReaderFactory;
 use Box\Spout\Common\Type;
+use Qpdb\PdoWrapper\PdoWrapperService;
+
+use Qpdb\QueryBuilder\QueryBuild;
 
 class Model
 {
@@ -21,6 +24,8 @@ class Model
         $this->placeHolderProp['%FAIL%'] = '';
         $this->dataProp['%FAIL_FILES%'] = [];
         $this->validCat = new ValidationCategory();
+        $configSample = new ConfigSample();
+        PdoWrapperService::getInstance()->setPdoWrapperConfig($configSample);
 
     }
 
@@ -35,9 +40,10 @@ class Model
         $reader = ReaderFactory::create(Type::CSV);
         $reader->open($file['request']['tmp_name']);
 
+//        $this->getCategoriesTree();
+
         foreach ($reader->getSheetIterator() as $sheet) {
             foreach ($sheet->getRowIterator() as $index => $row) {
-
 //                if(strlen($row[0])>255){
 //                    $this->placeHolderProp['%FAIL_FILES%'][] = $row;
 //                    continue;
@@ -45,7 +51,7 @@ class Model
 //                if($row[0] == '111'){
 //                    $this->placeHolderProp['%SUCCESS_FILES%'][] =  $row;
 //                }
-                $this->validCat->confirmData($row[4]);
+                $this->validCat->confirmData($row);
             }
         }
         $this->countFailSuccess();
@@ -53,11 +59,39 @@ class Model
         return $result;
     }
 
-    public function countFailSuccess(){
+    public function countFailSuccess()
+    {
 
-        if(count($this->dataProp['%FAIL_FILES%']) > 0)
+        if (count($this->dataProp['%FAIL_FILES%']) > 0) {
             $this->placeHolderProp['%FAIL%'] = 'Count fail row: ' . count($this->dataProp['%FAIL_FILES%']);
-        if(count($this->dataProp['%SUCCESS_FILES%']) >0 )
-            $this->placeHolderProp['%SUCCESS%'] = 'Count OK row: ' .count($this->dataProp['%SUCCESS_FILES%']);
+        }
+        if (count($this->dataProp['%SUCCESS_FILES%']) > 0) {
+            $this->placeHolderProp['%SUCCESS%'] = 'Count OK row: ' . count($this->dataProp['%SUCCESS_FILES%']);
+        }
     }
+
+    public function getCategoriesTree()
+    {
+        $query = QueryBuild::select('Categories')->fields('id', 'name', 'parent_id')->whereEqual('id', 8);
+        $categories = $query->execute();
+        dd($this->buildTree($categories));
+
+    }
+
+    function buildTree(array $elements, $parentId = 0)
+    {
+
+        $branch = array();
+        foreach ($elements as $element) {
+            if ($element['parent_id'] != null) {
+                $children = $this->buildTree($elements, $element['parent_id']);
+                if ($children) {
+                    $element['children'] = $children;
+                }
+                $branch[] = $element;
+            }
+        }
+        return $branch;
+    }
+
 }
